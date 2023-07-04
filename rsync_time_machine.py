@@ -467,9 +467,9 @@ def ln(src: str, dest: str, ssh: Optional[SSH] = None) -> None:
     run_cmd(f"ln -s -- '{src}' '{dest}'", ssh)
 
 
-def test_file_exists_src(path: str) -> bool:
+def test_file_exists_src(path: str, ssh: Optional[SSH] = None) -> bool:
     """Test if a file exists."""
-    return run_cmd(f"test -e '{path}'", None).returncode == 0
+    return run_cmd(f"test -e '{path}'", ssh).returncode == 0
 
 
 def get_file_system_type(path: str, ssh: Optional[SSH] = None) -> str:
@@ -808,7 +808,7 @@ def backup(
         allow_host_only=allow_host_only,
     )
 
-    if not test_file_exists_src(src_folder):
+    if not test_file_exists_src(src_folder, ssh):
         log_error(f"Source folder '{src_folder}' does not exist - aborting.")
         sys.exit(1)
 
