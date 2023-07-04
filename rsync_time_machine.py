@@ -559,7 +559,7 @@ def handle_ssh(
     dest_folder = dest_folder.rstrip("/")
     src_folder = src_folder.rstrip("/")
 
-    if not src_folder or not dest_folder:
+    if not src_folder and not dest_folder:
         log_error("Source and destination folder cannot be empty.")
         sys.exit(1)
 
